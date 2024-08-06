@@ -1,11 +1,30 @@
 package com.tutor.eshop.screen.navigations
 
+import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
+
+fun argScr(
+	arg: String,
+	argType: NavType<*>
+): NamedNavArgument = navArgument(arg) { type = argType }
+
+fun argGetInt(backStackEntry: NavBackStackEntry, key: String) =
+	backStackEntry.arguments?.getInt(key) ?: 0
+
+fun argGetStr(backStackEntry: NavBackStackEntry, key: String) =
+	backStackEntry.arguments?.getString(key) ?: ""
+
 sealed class Screen(
 	val route: String,
 ) {
+
 	data object OnBoarding : Screen("onboarding")
 	data object Home : Screen("home")
-	data object Detail : Screen("detail/{id}") { fun go(id: Int) = "detail/$id" }
+	data object Detail : Screen("detail/{id}") {
+		fun go(id: Int) = "detail/$id"
+	}
 
 	data object Cart : Screen("cart")
 	data object Profile : Screen("profile")

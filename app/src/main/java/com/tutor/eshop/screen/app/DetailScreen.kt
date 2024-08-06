@@ -76,8 +76,6 @@ fun DetailScreen(
 		}
 	}
 
-
-
 	Scaffold(
 		modifier = modifier
 			.fillMaxSize()

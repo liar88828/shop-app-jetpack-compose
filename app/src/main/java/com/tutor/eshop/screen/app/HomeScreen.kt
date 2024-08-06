@@ -83,7 +83,6 @@ fun HomeScreen(
 			NavigationBar {
 				MyNavigationBarItem("Home", Icons.Default.Home)
 				MyNavigationBarItem("Search", Icons.Default.Search)
-
 				NavigationBarItem(
 					modifier = Modifier,
 					colors = NavigationBarItemDefaults.colors(

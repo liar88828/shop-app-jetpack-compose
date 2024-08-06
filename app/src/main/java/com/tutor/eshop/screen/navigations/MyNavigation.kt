@@ -10,7 +10,6 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.tutor.eshop.screen.app.DetailScreen
 import com.tutor.eshop.screen.app.HomeScreen
 import com.tutor.eshop.screen.onboarding.OnBoardingScreen.OnBoardingScreen
@@ -19,7 +18,7 @@ import com.tutor.eshop.viewmodel.onboarding.OnBoardingViewModel
 
 @Composable
 fun MyNavigation(
-	startDestination:String,
+	startDestination: String,
 	eShopViewModel: EShopViewModel = hiltViewModel(),
 	onBoardingViewModel: OnBoardingViewModel = hiltViewModel()
 ) {
@@ -31,6 +30,7 @@ fun MyNavigation(
 		}
 	) {
 		val navController = rememberNavController()
+
 		NavHost(
 			navController = navController,
 			startDestination = startDestination//Screen.Home.route
@@ -53,10 +53,12 @@ fun MyNavigation(
 			}
 			composable(
 				route = Screen.Detail.route,
-				arguments = listOf(navArgument("id") { type = NavType.IntType })
+				arguments = listOf(
+					argScr("id", NavType.IntType),
+				)
 			) { backStackEntry ->
 				DetailScreen(
-					id = backStackEntry.arguments?.getInt("id") ?: 0,
+					id = argGetInt(backStackEntry, "id"),
 					navController = navController,
 					onEvent = eShopViewModel::onEvent,
 					state = eShopViewModel.state.collectAsState().value
