@@ -1,4 +1,4 @@
-package com.tutor.eshop.screen
+package com.tutor.eshop.screen.app
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,6 +33,8 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,8 +51,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.tutor.eshop.data.model.EStoresItem
-import com.tutor.eshop.viewmodel.EShopEvent
-import com.tutor.eshop.viewmodel.EShopState
+import com.tutor.eshop.viewmodel.eshop.EShopEvent
+import com.tutor.eshop.viewmodel.eshop.EShopState
 import com.tutor.retrofit_app.eshop.data.model.Rating
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -300,12 +302,12 @@ private fun DetailItem(
 @Preview
 @Composable
 private fun DetailScreenPrev() {
-	val navController = rememberNavController()
 	DetailScreen(
 		id = 1234,
-		navController = navController,
 		onEvent = {},
-		state = EShopState()
+		navController = rememberNavController(),
+		state = remember { mutableStateOf(EShopState()) }.value
+
 	)
 
 }

@@ -1,4 +1,4 @@
-package com.tutor.eshop.screen
+package com.tutor.eshop.screen.app
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,12 +22,13 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults.iconButtonColors
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -50,9 +51,10 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.tutor.eshop.data.model.EStores
 import com.tutor.eshop.data.model.EStoresItem
-import com.tutor.eshop.screen.component.MyNavigationBarItem
-import com.tutor.eshop.viewmodel.EShopEvent
-import com.tutor.eshop.viewmodel.EShopState
+import com.tutor.eshop.screen.navigations.Screen
+import com.tutor.eshop.screen.onboarding.component.MyNavigationBarItem
+import com.tutor.eshop.viewmodel.eshop.EShopEvent
+import com.tutor.eshop.viewmodel.eshop.EShopState
 import com.tutor.retrofit_app.eshop.data.model.Rating
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -61,7 +63,8 @@ fun HomeScreen(
 	navController: NavHostController,
 	state: EShopState,
 	onEvent: (EShopEvent) -> Unit,
-	modifier: Modifier = Modifier
+	modifier: Modifier = Modifier,
+//	viewModel: EShopViewModel = hiltViewModel()
 ) {
 	val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(
 		rememberTopAppBarState()
@@ -73,7 +76,6 @@ fun HomeScreen(
 	}
 
 	Scaffold(
-
 		modifier = modifier
 			.fillMaxSize()
 			.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -82,12 +84,31 @@ fun HomeScreen(
 				MyNavigationBarItem("Home", Icons.Default.Home)
 				MyNavigationBarItem("Search", Icons.Default.Search)
 
-				FloatingActionButton(onClick = {}) {
-					Icon(
-						imageVector = Icons.Default.Public,
-						contentDescription = "Public"
-					)
-				}
+				NavigationBarItem(
+					modifier = Modifier,
+					colors = NavigationBarItemDefaults.colors(
+						unselectedIconColor = MaterialTheme.colorScheme.error,
+						unselectedTextColor = MaterialTheme.colorScheme.onSurface,
+						selectedIconColor = MaterialTheme.colorScheme.surface,
+						selectedTextColor = MaterialTheme.colorScheme.onSurface,
+						indicatorColor = MaterialTheme.colorScheme.primary,
+
+						),
+					onClick = { /*TODO*/ },
+					label = { Text(text = "Public") },
+					selected = true,
+					icon = {
+						Icon(
+							imageVector = Icons.Default.Public,
+							contentDescription = "Public"
+						)
+					})
+//				FloatingActionButton(onClick = {}) {
+//					Icon(
+//						imageVector = Icons.Default.Public,
+//						contentDescription = "Public"
+//					)
+//				}
 				MyNavigationBarItem("Message", Icons.AutoMirrored.Filled.Message)
 
 				MyNavigationBarItem("Setting", Icons.Default.Settings)
@@ -213,7 +234,7 @@ private fun MyVerticalGridItem(
 				)
 				IconButton(
 					onClick = {
-						navController.navigate(EStoreRoute.Detail.go(item.id))
+						navController.navigate(Screen.Detail.go(item.id))
 
 					},
 					colors = iconButtonColors(
@@ -277,5 +298,15 @@ private fun MyLazyVerticalGridPrev() {
 	MyLazyVerticalGrid(
 		navController = rememberNavController(),
 		products = stores
+	)
+}
+
+@Preview
+@Composable
+private fun HomeScreenPrev() {
+	HomeScreen(
+		navController = rememberNavController(),
+		state = EShopState(),
+		onEvent = {}
 	)
 }

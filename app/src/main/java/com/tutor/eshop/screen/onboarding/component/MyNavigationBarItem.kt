@@ -1,4 +1,4 @@
-package com.tutor.eshop.screen.component
+package com.tutor.eshop.screen.onboarding.component
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.Icon

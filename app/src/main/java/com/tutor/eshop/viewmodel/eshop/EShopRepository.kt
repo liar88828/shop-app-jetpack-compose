@@ -1,4 +1,4 @@
-package com.tutor.eshop.viewmodel
+package com.tutor.eshop.viewmodel.eshop
 
 import com.tutor.eshop.data.EShopApi
 import com.tutor.eshop.data.model.EStores

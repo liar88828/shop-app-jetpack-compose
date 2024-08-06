@@ -1,4 +1,4 @@
-package com.tutor.eshop.viewmodel
+package com.tutor.eshop.viewmodel.eshop
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

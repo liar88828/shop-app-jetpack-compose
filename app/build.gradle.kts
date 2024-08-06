@@ -63,15 +63,25 @@ dependencies {
 	implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4")
 	implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
 	implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.4")
+//
 	implementation("com.google.dagger:hilt-android:2.50")
 	kapt("com.google.dagger:hilt-android-compiler:2.50")
+	kapt("androidx.hilt:hilt-compiler:1.2.0")
+	implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+//
 	implementation("com.squareup.retrofit2:retrofit:2.9.0")
 	implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+//
 	implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 	implementation("androidx.compose.material:material-icons-extended:1.6.8")
 	// Coil
 	implementation("io.coil-kt:coil-compose:2.6.0")
 	implementation("androidx.navigation:navigation-compose:2.7.7")
+	// Splash Screen
+	implementation("androidx.core:core-splashscreen:1.0.1")
+	// DataStore
+	implementation("androidx.datastore:datastore-preferences:1.1.1")
+
 }
 kapt {
 	correctErrorTypes = true
