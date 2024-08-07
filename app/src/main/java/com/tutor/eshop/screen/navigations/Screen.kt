@@ -57,5 +57,9 @@ sealed class Screen(
 	data object OrderPolicy : Screen("order_policy")
 	data object OrderCookie : Screen("order_cookie")
 
+	//	Navigation
+	data object Base : Screen("base")
+
+
 }
 

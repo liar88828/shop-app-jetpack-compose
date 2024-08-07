@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -18,7 +19,7 @@ class EShopViewModel
 ) : ViewModel() {
 
 	private val _state = MutableStateFlow(EShopState())
-	val state = _state
+	val state = _state.asStateFlow()
 
 	private fun getProducts() {
 		_state.value.loading=true

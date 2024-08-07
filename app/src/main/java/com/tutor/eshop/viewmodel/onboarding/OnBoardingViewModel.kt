@@ -28,7 +28,7 @@ class OnBoardingViewModel
 	init {
 		myPreference.readAppEntry.onEach { loadObBoarding ->
 			startDestination = if (loadObBoarding) Screen.OnBoarding.route
-			else Screen.Home.route
+			else Screen.Base.route
 			delay(300)
 			isLoading = false
 		}
