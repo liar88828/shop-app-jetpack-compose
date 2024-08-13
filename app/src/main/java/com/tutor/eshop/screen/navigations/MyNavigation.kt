@@ -14,7 +14,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.tutor.eshop.screen.app.DetailScreen
-import com.tutor.eshop.screen.app.HomeScreen
+import com.tutor.eshop.screen.app.carts.CartsScreen
+import com.tutor.eshop.screen.app.home.HomeScreen
+import com.tutor.eshop.screen.app.like.LikeScreen
+import com.tutor.eshop.screen.app.profile.ProfileScreen
+import com.tutor.eshop.screen.app.search.SearchScreen
 import com.tutor.eshop.screen.onboarding.OnBoardingScreen.OnBoardingScreen
 import com.tutor.eshop.viewmodel.eshop.EShopViewModel
 import com.tutor.eshop.viewmodel.onboarding.OnBoardingViewModel
@@ -57,6 +61,37 @@ fun MyNavigation(
 						navController = navController,
 						onEvent = eShopViewModel::onEvent,
 						state = state
+					)
+				}
+				composable(
+					route = Screen.Search.route,
+				) {
+					val state by eShopViewModel.state.collectAsStateWithLifecycle()
+					SearchScreen(
+						navController = navController,
+						onEvent = eShopViewModel::onEvent,
+						state = state
+					)
+				}
+				composable(
+					route = Screen.Like.route,
+				) {
+					LikeScreen(
+						navController = navController,
+					)
+				}
+				composable(
+					route = Screen.Cart.route,
+				) {
+					CartsScreen(
+						navController = navController,
+					)
+				}
+				composable(
+					route = Screen.Profile.route,
+				) {
+					ProfileScreen(
+						navController = navController,
 					)
 				}
 				composable(

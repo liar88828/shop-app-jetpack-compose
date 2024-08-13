@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import com.tutor.eshop.ui.theme.fontInter
 
 @Composable
 fun TitleCard(
@@ -26,7 +25,6 @@ fun TitleCard(
 			text = title,
 			style = MaterialTheme.typography.titleLarge,
 			fontWeight = FontWeight.Bold,
-			fontFamily = fontInter
 		)
 		component()
 

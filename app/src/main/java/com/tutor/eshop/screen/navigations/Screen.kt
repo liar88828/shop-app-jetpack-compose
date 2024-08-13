@@ -27,6 +27,7 @@ sealed class Screen(
 	}
 
 	data object Cart : Screen("cart")
+	data object Like : Screen("like")
 	data object Profile : Screen("profile")
 	data object Setting : Screen("setting")
 	data object Login : Screen("login")

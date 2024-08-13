@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tutor.eshop.data.model.exampleItem
 import com.tutor.eshop.screen.app.cart.component.TitleCard
+import com.tutor.eshop.screen.app.carts.CartProductItem
 import com.tutor.eshop.ui.theme.fontInter
 
 @Composable

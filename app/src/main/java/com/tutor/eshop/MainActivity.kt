@@ -8,7 +8,6 @@ import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.tutor.eshop.screen.navigations.MyNavigation
 import com.tutor.eshop.ui.theme.EShopTheme
-import com.tutor.eshop.viewmodel.eshop.EShopViewModel
 import com.tutor.eshop.viewmodel.onboarding.OnBoardingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,7 +27,6 @@ class MainActivity : ComponentActivity() {
 				MyNavigation(
 					onBoardingViewModel.startDestination
 				)
-
 			}
 		}
 	}

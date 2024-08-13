@@ -8,10 +8,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 
 @Composable
-fun RowScope.MyNavigationBarItem(title: String, icon: ImageVector) {
-	NavigationBarItem(onClick = { /*TODO*/ },
+fun RowScope.MyNavigationBarItem(
+	title: String,
+	icon: ImageVector,
+	route: () -> Unit = {},
+	select: Boolean = false
+) {
+	NavigationBarItem(
+		onClick = route,
 		label = { Text(text = title) },
-		selected = true,
+		selected = select,
 		icon = {
 			Icon(
 				imageVector = icon,
