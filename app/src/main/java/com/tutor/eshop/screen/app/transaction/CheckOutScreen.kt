@@ -1,4 +1,4 @@
-package com.tutor.eshop.screen.app.cart
+package com.tutor.eshop.screen.app.transaction
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -27,8 +27,15 @@ import com.tutor.eshop.screen.app.cart.component.TitleCard
 import com.tutor.eshop.ui.theme.fontInter
 
 @Composable
-fun CheckOutScreen(modifier: Modifier = Modifier) {
-	Card(modifier.fillMaxWidth()) {
+fun CheckOutScreen(
+	onClick: () -> Unit,
+	modifier: Modifier = Modifier
+) {
+	Card(
+		modifier
+			.fillMaxWidth()
+			.padding(horizontal = 20.dp)
+	) {
 		Column(
 			modifier = modifier
 				.fillMaxWidth()
@@ -41,7 +48,7 @@ fun CheckOutScreen(modifier: Modifier = Modifier) {
 				component = {
 					OutlinedIconButton(
 						modifier = modifier.size(30.dp),
-						onClick = {},
+						onClick = onClick,
 						shape = MaterialTheme.shapes.medium,
 						border = BorderStroke(
 							width = 1.dp, color = MaterialTheme.colorScheme.primary
@@ -98,5 +105,5 @@ fun CheckOutScreen(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun CheckOutScreenPrev() {
-	CheckOutScreen()
+	CheckOutScreen({})
 }

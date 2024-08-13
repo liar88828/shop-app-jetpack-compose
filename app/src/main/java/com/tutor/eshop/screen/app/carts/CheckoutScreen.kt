@@ -1,4 +1,4 @@
-package com.tutor.eshop.screen.app.cart
+package com.tutor.eshop.screen.app.carts
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,11 +21,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tutor.eshop.data.model.exampleItem
 import com.tutor.eshop.screen.app.cart.component.TitleCard
-import com.tutor.eshop.screen.app.carts.CartProductItem
 import com.tutor.eshop.ui.theme.fontInter
 
 @Composable
-fun CartScreen(modifier: Modifier = Modifier) {
+fun CheckoutScreen(
+	onCheckOut: () -> Unit,
+	modifier: Modifier = Modifier
+) {
 	ElevatedCard(
 		modifier = modifier.fillMaxWidth(),
 		elevation = CardDefaults.cardElevation(4.dp),
@@ -83,7 +85,7 @@ fun CartScreen(modifier: Modifier = Modifier) {
 			}
 
 			Button(
-				onClick = {},
+				onClick = onCheckOut,
 				shape = MaterialTheme.shapes.medium,
 				modifier = modifier.fillMaxWidth()
 			) {
@@ -102,5 +104,5 @@ fun CartScreen(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun CartScreenPrev() {
-	CartScreen()
+	CheckoutScreen({})
 }

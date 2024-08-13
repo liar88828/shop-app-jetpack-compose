@@ -198,3 +198,36 @@ fun SearchTopAppBar(
 
 		)
 }
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+fun CartsTopAppBar(
+	scrollBehavior: TopAppBarScrollBehavior,
+	modifier: Modifier,
+	search: MutableState<String>
+) {
+	CenterAlignedTopAppBar(
+		navigationIcon = {
+			IconButton({}) {
+				Icon(
+					imageVector = Icons.Default.ArrowBackIosNew,
+					contentDescription = "Back Icon"
+				)
+			}
+		},
+		scrollBehavior = scrollBehavior,
+		title = { Text("Carts ") },
+		actions = {
+			IconButton(onClick = { /*TODO*/ }) {
+				Icon(
+					imageVector = Icons.Default.Menu,
+					contentDescription = "Menu"
+				)
+			}
+		},
+		colors = TopAppBarDefaults.topAppBarColors(
+			containerColor = MaterialTheme.colorScheme.primaryContainer,
+			titleContentColor = MaterialTheme.colorScheme.primary,
+		),
+	)
+}

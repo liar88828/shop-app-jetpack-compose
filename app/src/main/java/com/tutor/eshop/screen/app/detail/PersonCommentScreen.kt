@@ -1,4 +1,4 @@
-package com.tutor.eshop.screen.app.cart
+package com.tutor.eshop.screen.app.detail
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -32,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tutor.eshop.R
 
@@ -62,7 +63,8 @@ fun PersonCommentScreen(modifier: Modifier = Modifier) {
 						modifier = modifier.padding(horizontal = 10.dp),
 					) {
 						Text(
-							text = "Rajendra Rodriguez", style = MaterialTheme.typography.titleLarge
+							text = "Rajendra Rodriguez",
+							style = MaterialTheme.typography.titleLarge
 						)
 						Spacer(modifier.height(5.dp))
 						Text(
@@ -142,7 +144,10 @@ fun PersonCommentScreen(modifier: Modifier = Modifier) {
 				)
 			}
 
-			Text(text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,")
+			Text(
+				text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,",
+				style = MaterialTheme.typography.bodyMedium
+			)
 
 			LazyRow(
 				verticalAlignment = Alignment.CenterVertically,
@@ -170,5 +175,14 @@ fun PersonCommentScreen(modifier: Modifier = Modifier) {
 				}
 			}
 		}
+
 	}
+
+}
+
+@Preview
+@Composable
+private fun PersonCommentScreenPrev() {
+	PersonCommentScreen()
+
 }

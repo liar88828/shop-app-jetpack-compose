@@ -1,4 +1,4 @@
-package com.tutor.eshop.screen.app.cart
+package com.tutor.eshop.screen.app.transaction
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement

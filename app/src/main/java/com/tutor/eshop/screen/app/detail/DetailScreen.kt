@@ -1,17 +1,19 @@
-package com.tutor.eshop.screen.app
+package com.tutor.eshop.screen.app.detail
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddShoppingCart
 import androidx.compose.material.icons.filled.ArrowBackIosNew
@@ -30,6 +32,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -41,15 +44,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
+import com.tutor.eshop.R
 import com.tutor.eshop.data.model.EStoresItem
 import com.tutor.eshop.viewmodel.eshop.EShopEvent
 import com.tutor.eshop.viewmodel.eshop.EShopState
@@ -75,95 +79,14 @@ fun DetailScreen(
 			onEvent(EShopEvent.GetProduct(id))
 		}
 	}
+	val test = true
 
 	Scaffold(
 		modifier = modifier
 			.fillMaxSize()
 			.nestedScroll(scrollBehavior.nestedScrollConnection),
-		bottomBar = {
-			BottomAppBar(
-				containerColor = Color.Transparent,
-				contentColor = Color.Transparent,
-				windowInsets = WindowInsets(40, 0, 40, 0)
-			) {
-				Row(
-					modifier = modifier.fillMaxWidth(),
-					horizontalArrangement = Arrangement.SpaceBetween,
-				) {
-					FloatingActionButton(onClick = {}) {
-						Icon(
-							imageVector = Icons.Default.Favorite,
-							contentDescription = "Icons Favorite"
-						)
-					}
-					ExtendedFloatingActionButton(
-						onClick = {}
-					) {
-						Row(
-							horizontalArrangement = Arrangement.spacedBy(8.dp),
-							verticalAlignment = Alignment.CenterVertically
-
-						) {
-
-							Icon(
-								imageVector = Icons.Default.Paid,
-								contentDescription = "Paid"
-							)
-
-							Text(text = "Buy Now")
-						}
-					}
-					ExtendedFloatingActionButton(
-						onClick = {}
-					) {
-						Row(
-							horizontalArrangement = Arrangement.spacedBy(8.dp),
-							verticalAlignment = Alignment.CenterVertically
-
-						) {
-
-							Icon(
-								imageVector = Icons.Default.AddShoppingCart,
-								contentDescription = "AddShoppingCart"
-							)
-
-							Text(text = "Add  Trolley")
-						}
-					}
-				}
-
-			}
-
-		},
-		topBar = {
-			TopAppBar(
-				navigationIcon = {
-					IconButton(onClick = {
-						navController.navigateUp()
-
-					}) {
-						Icon(
-							imageVector = Icons.Default.ArrowBackIosNew,
-							contentDescription = "Back "
-						)
-					}
-				},
-				scrollBehavior = scrollBehavior,
-				title = { Text(text = "Detail Product") },
-				actions = {
-					IconButton(onClick = { /*TODO*/ }) {
-						Icon(
-							imageVector = Icons.Default.AddShoppingCart,
-							contentDescription = "image"
-						)
-					}
-				},
-				colors = TopAppBarDefaults.topAppBarColors(
-					containerColor = MaterialTheme.colorScheme.primaryContainer,
-					titleContentColor = MaterialTheme.colorScheme.primary,
-				),
-			)
-		},
+		bottomBar = { DetailBottomAppBar(modifier) },
+		topBar = { DetailTopAppBar(navController, scrollBehavior) },
 	) { innerPadding ->
 		Box(
 			contentAlignment = Alignment.Center,
@@ -171,18 +94,23 @@ fun DetailScreen(
 				.padding(innerPadding)
 				.fillMaxSize()
 		) {
-			if (state.product == null) Text(text = state.message)
-			else {
-				if (state.loading) {
-					Column(
-						horizontalAlignment = Alignment.CenterHorizontally
-					) {
-						Text("Loading...")
-						CircularProgressIndicator()
-					}
+			if (test) {
+				DetailItem(exampleItemDetailProduct, test = test)
+			} else {
 
-				} else {
-					DetailItem(state.product!!)
+				if (state.product == null) Text(text = state.message)
+				else {
+					if (state.loading) {
+						Column(
+							horizontalAlignment = Alignment.CenterHorizontally
+						) {
+							Text("Loading...")
+							CircularProgressIndicator()
+						}
+
+					} else {
+						DetailItem(state.product!!, test = test)
+					}
 				}
 			}
 		}
@@ -190,13 +118,125 @@ fun DetailScreen(
 }
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun DetailTopAppBar(
+	navController: NavHostController,
+	scrollBehavior: TopAppBarScrollBehavior
+) {
+	TopAppBar(
+		navigationIcon = {
+			IconButton(onClick = {
+				navController.navigateUp()
+
+			}) {
+				Icon(
+					imageVector = Icons.Default.ArrowBackIosNew,
+					contentDescription = "Back "
+				)
+			}
+		},
+		scrollBehavior = scrollBehavior,
+		title = { Text(text = "Detail Product") },
+		actions = {
+			IconButton(onClick = { /*TODO*/ }) {
+				Icon(
+					imageVector = Icons.Default.AddShoppingCart,
+					contentDescription = "image"
+				)
+			}
+		},
+		colors = TopAppBarDefaults.topAppBarColors(
+			containerColor = MaterialTheme.colorScheme.primaryContainer,
+			titleContentColor = MaterialTheme.colorScheme.primary,
+		),
+	)
+}
+
+@Composable
+private fun DetailBottomAppBar(modifier: Modifier) {
+	BottomAppBar(
+		containerColor = Color.Transparent,
+		contentColor = Color.Transparent,
+		windowInsets = WindowInsets(40, 0, 40, 0)
+	) {
+		Row(
+			modifier = modifier.fillMaxWidth(),
+			horizontalArrangement = Arrangement.SpaceBetween,
+		) {
+			FloatingActionButton(onClick = {}) {
+				Icon(
+					imageVector = Icons.Default.Favorite,
+					contentDescription = "Icons Favorite"
+				)
+			}
+			ExtendedFloatingActionButton(
+				onClick = {}
+			) {
+				Row(
+					horizontalArrangement = Arrangement.spacedBy(8.dp),
+					verticalAlignment = Alignment.CenterVertically
+
+				) {
+
+					Icon(
+						imageVector = Icons.Default.Paid,
+						contentDescription = "Paid"
+					)
+
+					Text(text = "Buy Now")
+				}
+			}
+			ExtendedFloatingActionButton(
+				onClick = {}
+			) {
+				Row(
+					horizontalArrangement = Arrangement.spacedBy(8.dp),
+					verticalAlignment = Alignment.CenterVertically
+
+				) {
+
+					Icon(
+						imageVector = Icons.Default.AddShoppingCart,
+						contentDescription = "AddShoppingCart"
+					)
+
+					Text(text = "Add  Trolley")
+				}
+			}
+		}
+
+	}
+}
+
+@Composable
 private fun DetailItem(
-	item: EStoresItem, modifier: Modifier = Modifier
+	item: EStoresItem,
+	test: Boolean = false,
+	modifier: Modifier = Modifier
+) {
+	LazyColumn(
+		contentPadding = PaddingValues(10.dp),
+		verticalArrangement = Arrangement.spacedBy(10.dp),
+		modifier = modifier.fillMaxHeight()
+	) {
+		item() {
+			DetailProductItem(test, item)
+		}
+		item {
+			PersonCommentScreen()
+
+		}
+	}
+}
+
+@Composable
+private fun DetailProductItem(
+	test: Boolean,
+	item: EStoresItem,
+	modifier: Modifier = Modifier,
 ) {
 	Card(
-		modifier
-			.fillMaxWidth()
-			.padding(5.dp),
+		modifier.fillMaxWidth(),
 	) {
 		Column(
 			modifier
@@ -205,82 +245,79 @@ private fun DetailItem(
 			horizontalAlignment = Alignment.CenterHorizontally,
 			verticalArrangement = Arrangement.spacedBy(10.dp)
 		) {
+			if (test) {
+				Image(
+					painter = painterResource(R.drawable.ic_launcher_foreground),
+					contentDescription = item.title,
+					contentScale = ContentScale.Inside,
+					modifier = modifier
+						.size(400.dp)
+						.background(
+							color = MaterialTheme.colorScheme.background,
+							shape = MaterialTheme.shapes.medium
+						)
+						.padding(10.dp)
 
-			AsyncImage(
-				model = item.image,
-				contentDescription = item.title,
-				contentScale = ContentScale.Inside,
-				modifier = modifier
-					.size(400.dp)
-					.background(
-						color = MaterialTheme.colorScheme.background,
-						shape = MaterialTheme.shapes.medium
-					)
-					.padding(10.dp)
-			)
-//			Image(
-//				painter = painterResource(R.drawable.ic_launcher_foreground),
-//				contentDescription = item.title,
-//				contentScale = ContentScale.Inside,
-//				modifier = modifier
-//					.size(400.dp)
-//					.background(
-//						color = MaterialTheme.colorScheme.background,
-//						shape = MaterialTheme.shapes.medium
-//					)
-//					.padding(10.dp)
-//
-//			)
+				)
+			} else {
+				AsyncImage(
+					model = item.image,
+					contentDescription = item.title,
+					contentScale = ContentScale.Inside,
+					modifier = modifier
+						.size(400.dp)
+						.background(
+							color = MaterialTheme.colorScheme.background,
+							shape = MaterialTheme.shapes.medium
+						)
+						.padding(10.dp)
+				)
+
+			}
 
 			Column(
 				modifier = modifier.fillMaxWidth(),
-				verticalArrangement = Arrangement.spacedBy(10.dp)
 			) {
 				Text(
 					text = item.title,
-					fontWeight = FontWeight.SemiBold,
-					fontSize = 28.sp,
 					overflow = TextOverflow.Ellipsis,
-					maxLines = 2
+					maxLines = 2,
+					style = MaterialTheme.typography.titleLarge,
 				)
 				Text(
-					text = "$${item.price}", fontSize = 20.sp,
-					textAlign = TextAlign.Justify,
-					fontWeight = FontWeight.SemiBold
+					text = "$${item.price}",
+					style = MaterialTheme.typography.bodyLarge,
+					fontWeight = FontWeight.Bold
 				)
 			}
 
 			Column(modifier = modifier.fillMaxWidth()) {
 				Text(
-					text = "Category ", fontSize = 20.sp,
-					textAlign = TextAlign.Justify,
-					fontWeight = FontWeight.SemiBold
+					text = "Category ",
+					style = MaterialTheme.typography.titleMedium,
 				)
 				Text(
 					text = item.category,
-					fontSize = 20.sp,
-					textAlign = TextAlign.Justify,
-					fontWeight = FontWeight.Light
-
+					style = MaterialTheme.typography.bodyMedium,
 				)
 			}
 			Column(
 				modifier = modifier
 					.fillMaxWidth()
-					.verticalScroll(rememberScrollState())
+//							.verticalScroll(rememberScrollState())
 
 			) {
 				Text(
-					text = "description", fontSize = 20.sp,
-					textAlign = TextAlign.Justify,
-					fontWeight = FontWeight.SemiBold
-				)
-				Text(
-					text = item.description, fontSize = 20.sp,
-					textAlign = TextAlign.Justify,
-					fontWeight = FontWeight.Light
+					text = "Description",
+					style = MaterialTheme.typography.titleMedium,
 
-				)
+					)
+				Text(
+					text = item.description,
+					textAlign = TextAlign.Justify,
+					style = MaterialTheme.typography.bodySmall,
+
+					)
 			}
 		}
 	}

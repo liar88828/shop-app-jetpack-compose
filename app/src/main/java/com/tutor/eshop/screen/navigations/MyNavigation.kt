@@ -13,8 +13,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
-import com.tutor.eshop.screen.app.DetailScreen
 import com.tutor.eshop.screen.app.carts.CartsScreen
+import com.tutor.eshop.screen.app.detail.DetailScreen
 import com.tutor.eshop.screen.app.home.HomeScreen
 import com.tutor.eshop.screen.app.like.LikeScreen
 import com.tutor.eshop.screen.app.profile.ProfileScreen
@@ -85,6 +85,7 @@ fun MyNavigation(
 				) {
 					CartsScreen(
 						navController = navController,
+//						onEvent =
 					)
 				}
 				composable(

@@ -1,4 +1,4 @@
-package com.tutor.eshop.screen.app.cart
+package com.tutor.eshop.screen.app.market
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
