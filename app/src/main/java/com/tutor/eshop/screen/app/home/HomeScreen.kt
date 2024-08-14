@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -43,7 +42,6 @@ fun HomeScreen(
 		rememberTopAppBarState()
 	)
 
-	val scoped = rememberCoroutineScope()
 	LaunchedEffect(key1 = true) {
 		onEvent(EShopEvent.GetProducts)
 	}
@@ -85,16 +83,12 @@ fun HomeScreen(
 						buttonAction = { /*TODO*/ },
 						list = state.products ?: listOf()
 					)
-				}
-				item() {
-					ListRowProductScreen(
-						title = "New Products",
-						textButton = "See All",
-						buttonAction = { /*TODO*/ },
-						list = state.products ?: listOf()
+
+					CardBanner()
+					CardHorizontal(
+						products = state.products ?: listOf()
 					)
-				}
-				item() {
+
 					ListRowProductScreen(
 						title = "Discount",
 						textButton = "See All",

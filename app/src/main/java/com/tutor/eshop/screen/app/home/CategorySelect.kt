@@ -1,5 +1,6 @@
 package com.tutor.eshop.screen.app.home
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
@@ -33,7 +34,7 @@ fun CategorySelect(
 	}
 	LazyRow(
 		modifier = modifier.fillMaxWidth(),
-//				contentPadding= PaddingValues(20.dp)
+		contentPadding = PaddingValues(10.dp)
 	) {
 		items(listCategory) {
 			ChipItem(

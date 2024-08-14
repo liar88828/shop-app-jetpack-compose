@@ -51,26 +51,27 @@ fun CarouselPromo() {
 	}
 
 	Column(
+		modifier = Modifier.padding(horizontal = 10.dp),
 		horizontalAlignment = Alignment.CenterHorizontally,
 	) {
 		HorizontalPager(
 			state = pagerState,
-
-			) {
+			pageSpacing = 10.dp
+		) {
 			CarouselItem(
 				pagerState,
 				it
 			)
 		}
 
-		LazyRow() {
+		LazyRow(modifier = Modifier.padding(5.dp)) {
 			items(pagerState.pageCount) {
 				Box(
 					modifier = Modifier
-						.padding(5.dp)
+						.padding(4.dp)
 						.size(
-							width = if (pagerState.currentPage == it) 40.dp else 15.dp,
-							height = 15.dp
+							width = if (pagerState.currentPage == it) 40.dp else 10.dp,
+							height = 10.dp
 						)
 						.background(
 							color =
@@ -90,7 +91,6 @@ fun CarouselPromo() {
 private fun CarouselItem(pagerState: PagerState, it: Int, modifier: Modifier = Modifier) {
 	Card(
 		modifier = modifier
-			.padding(10.dp)
 			.height(200.dp)
 			.fillMaxHeight()
 			.graphicsLayer {

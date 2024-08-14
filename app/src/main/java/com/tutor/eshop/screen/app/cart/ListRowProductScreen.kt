@@ -40,7 +40,7 @@ fun ListRowProductScreen(
 		Column(
 			modifier = modifier
 				.fillMaxWidth()
-				.padding(15.dp)
+				.padding(10.dp)
 				.height(320.dp),
 			verticalArrangement = Arrangement.spacedBy(8.dp)
 		) {
@@ -116,7 +116,7 @@ fun ListRowProductScreenBackground(
 	}
 }
 
-@Preview(showBackground = true)
+@Preview()
 @Composable
 private fun ListRowProductScreenPrev() {
 	ListRowProductScreen(

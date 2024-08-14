@@ -22,3 +22,13 @@ val exampleItem = EStoresItem(
 	rating = Rating(rate = 4.5, count = 200),
 	title = "Smartphone etiam conceptam parturient audire propriae appetere pretium praesent scripserit interpretaris bibendum scripta nunc adhuc sapientem sadipscing conubia erroribus "
 )
+
+val exampleItem2 = EStoresItem(
+	category = "Electronics movet labores ridiculus neque tempus affert vidisse pertinacia epicuri interpretaris dicant aliquid sapientem auctor docendi error sale eos instructior accumsan dico graeci",
+	description = "A high-quality electronic device. movet labores ridiculus neque tempus affert vidisse pertinacia epicuri interpretaris dicant aliquid sapientem auctor docendi error sale eos instructior accumsan dico graeci",
+	id = 1,
+	image = R.drawable.ic_launcher_foreground.toString(),
+	price = 299.99,
+	rating = Rating(rate = 4.5, count = 200),
+	title = "Smartphone etiam conceptam parturient audire propriae appetere pretium praesent scripserit interpretaris bibendum scripta nunc adhuc sapientem sadipscing conubia erroribus "
+)
