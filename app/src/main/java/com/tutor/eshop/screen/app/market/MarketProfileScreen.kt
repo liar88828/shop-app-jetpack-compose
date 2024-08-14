@@ -23,6 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tutor.eshop.R
 import com.tutor.eshop.ui.theme.fontInter
@@ -128,4 +129,10 @@ private fun MarketProfileStatic(modifier: Modifier = Modifier, size: String, tit
 		)
 	}
 
+}
+
+@Preview
+@Composable
+private fun MarketProfileScreenPrev() {
+	MarketProfileScreen()
 }
