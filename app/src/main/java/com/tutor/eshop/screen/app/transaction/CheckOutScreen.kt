@@ -4,11 +4,14 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreHoriz
+import androidx.compose.material.icons.filled.Payment
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonDefaults
@@ -28,13 +31,15 @@ import com.tutor.eshop.ui.theme.fontInter
 
 @Composable
 fun CheckOutScreen(
-	onClick: () -> Unit,
+	onClose: () -> Unit,
+	onCheckout: () -> Unit,
 	modifier: Modifier = Modifier
 ) {
 	Card(
 		modifier
 			.fillMaxWidth()
 			.padding(horizontal = 20.dp)
+
 	) {
 		Column(
 			modifier = modifier
@@ -48,7 +53,7 @@ fun CheckOutScreen(
 				component = {
 					OutlinedIconButton(
 						modifier = modifier.size(30.dp),
-						onClick = onClick,
+						onClick = onClose,
 						shape = MaterialTheme.shapes.medium,
 						border = BorderStroke(
 							width = 1.dp, color = MaterialTheme.colorScheme.primary
@@ -96,6 +101,19 @@ fun CheckOutScreen(
 					)
 				}
 			})
+			Button(
+				onClick = onCheckout,
+				modifier = modifier.fillMaxWidth(),
+				shape = MaterialTheme.shapes.medium
+			) {
+				Text(
+					text = "Checkout",
+					style = MaterialTheme.typography.titleMedium,
+				)
+				Spacer(modifier.size(10.dp))
+
+				Icon(imageVector = Icons.Default.Payment, contentDescription = "Icon Pay")
+			}
 			//------
 
 		}
@@ -105,5 +123,7 @@ fun CheckOutScreen(
 @Preview
 @Composable
 private fun CheckOutScreenPrev() {
-	CheckOutScreen({})
+	CheckOutScreen({}, {
+		true
+	})
 }

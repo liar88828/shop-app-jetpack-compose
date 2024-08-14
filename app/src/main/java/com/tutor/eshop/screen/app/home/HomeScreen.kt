@@ -21,6 +21,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.tutor.eshop.data.model.EStores
+import com.tutor.eshop.data.model.exampleItem
+import com.tutor.eshop.data.model.exampleItem2
 import com.tutor.eshop.screen.app.cart.ListRowProductScreen
 import com.tutor.eshop.screen.app.component.HomeTopAppBar
 import com.tutor.eshop.screen.app.component.MyBottomAppBar
@@ -103,8 +106,19 @@ fun HomeScreen(
 	}
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+@Preview(
+	showBackground = true,
+	heightDp = 1500
+)
 @Composable
 private fun HomeScreenPrev() {
-	HomeScreen(navController = rememberNavController(), state = EShopState(), onEvent = {})
+	val data = EStores()
+	data.add(exampleItem)
+	data.add(exampleItem2)
+	HomeScreen(
+		navController = rememberNavController(),
+		state = EShopState(
+			products = data
+		),
+		onEvent = {})
 }

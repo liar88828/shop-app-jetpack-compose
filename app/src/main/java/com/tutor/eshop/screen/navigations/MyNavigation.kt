@@ -83,9 +83,11 @@ fun MyNavigation(
 				composable(
 					route = Screen.Cart.route,
 				) {
+					val state by eShopViewModel.state.collectAsStateWithLifecycle()
 					CartsScreen(
 						navController = navController,
-//						onEvent =
+						state = state,
+						onEvent = eShopViewModel::onEvent
 					)
 				}
 				composable(
