@@ -76,8 +76,12 @@ fun MyNavigation(
 				composable(
 					route = Screen.Like.route,
 				) {
+					val state by eShopViewModel.state.collectAsStateWithLifecycle()
+
 					LikeScreen(
 						navController = navController,
+						onEvent = eShopViewModel::onEvent,
+						state = state
 					)
 				}
 				composable(

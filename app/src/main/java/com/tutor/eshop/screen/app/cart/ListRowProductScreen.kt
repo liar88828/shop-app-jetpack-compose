@@ -41,7 +41,7 @@ fun ListRowProductScreen(
 			modifier = modifier
 				.fillMaxWidth()
 				.padding(10.dp)
-				.height(320.dp),
+				.height(310.dp),
 			verticalArrangement = Arrangement.spacedBy(8.dp)
 		) {
 

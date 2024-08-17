@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 val listCategory = listOf(
@@ -60,4 +61,10 @@ private fun ChipItem(
 		label = { Text(title) },
 		selected = select
 	)
+}
+
+@Preview
+@Composable
+private fun CategorySelectPrev() {
+	CategorySelect()
 }

@@ -53,37 +53,38 @@ fun CarouselPromo() {
 	Column(
 		modifier = Modifier.padding(horizontal = 10.dp),
 		horizontalAlignment = Alignment.CenterHorizontally,
+		verticalArrangement = Arrangement.SpaceBetween
 	) {
 		HorizontalPager(
 			state = pagerState,
 			pageSpacing = 10.dp
-		) {
-			CarouselItem(
-				pagerState,
-				it
-			)
-		}
-
-		LazyRow(modifier = Modifier.padding(5.dp)) {
-			items(pagerState.pageCount) {
-				Box(
-					modifier = Modifier
-						.padding(4.dp)
-						.size(
-							width = if (pagerState.currentPage == it) 40.dp else 10.dp,
-							height = 10.dp
-						)
-						.background(
-							color =
-							if (pagerState.currentPage == it) MaterialTheme.colorScheme.primaryContainer
-							else MaterialTheme.colorScheme.primary,
-							shape = MaterialTheme.shapes.medium
-						)
-				)
-			}
-		}
+		) { CarouselItem(pagerState, it) }
+		DotBanner(pagerState)
 	}
 
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+private fun DotBanner(pagerState: PagerState) {
+	LazyRow() {
+		items(pagerState.pageCount) {
+			Box(
+				modifier = Modifier
+					.padding(4.dp)
+					.size(
+						width = if (pagerState.currentPage == it) 40.dp else 10.dp,
+						height = 10.dp
+					)
+					.background(
+						color =
+						if (pagerState.currentPage == it) MaterialTheme.colorScheme.primaryContainer
+						else MaterialTheme.colorScheme.primary,
+						shape = MaterialTheme.shapes.medium
+					)
+			)
+		}
+	}
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -94,9 +95,6 @@ private fun CarouselItem(pagerState: PagerState, it: Int, modifier: Modifier = M
 			.height(200.dp)
 			.fillMaxHeight()
 			.graphicsLayer {
-				// Calculate the absolute offset for the current page from the
-				// scroll position. We use the absolute value which allows us to mirror
-				// any effects for both directions
 				val pageOffset = (
 						(pagerState.currentPage - it) + pagerState
 							.currentPageOffsetFraction

@@ -122,7 +122,7 @@ fun SearchTopAppBar(
 			IconButton({}) {
 				Icon(
 					imageVector = Icons.Default.ArrowBackIosNew,
-					contentDescription = "Back Icon"
+					contentDescription = "Back Back"
 				)
 			}
 		},
@@ -231,3 +231,4 @@ fun CartsTopAppBar(
 		),
 	)
 }
+

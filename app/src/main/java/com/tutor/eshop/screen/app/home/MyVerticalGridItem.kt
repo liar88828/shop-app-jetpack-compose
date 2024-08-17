@@ -27,7 +27,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
@@ -45,22 +44,21 @@ private fun MyVerticalGridItem(
 	Card(
 		modifier
 			.fillMaxWidth()
-			.padding(5.dp),
+			.padding(horizontal = 5.dp),
 	) {
 		Column(
 			modifier
 				.fillMaxWidth()
-				.padding(10.dp),
-			horizontalAlignment = Alignment.CenterHorizontally,
+				.padding(5.dp),
+//			horizontalAlignment = Alignment.CenterHorizontally,
 			verticalArrangement = Arrangement.spacedBy(10.dp)
 		) {
-
 			AsyncImage(
 				model = item.image,
 				contentDescription = item.title,
 				contentScale = ContentScale.Inside,
 				modifier = modifier
-					.size(160.dp)
+					.size(180.dp)
 					.background(
 						color = MaterialTheme.colorScheme.background,
 						shape = MaterialTheme.shapes.medium
@@ -74,45 +72,49 @@ private fun MyVerticalGridItem(
 //				contentScale = ContentScale.Crop,
 //				modifier = modifier.size(160.dp)
 //			)
-
-			Column() {
-				Text(
-					text = item.title,
-					fontWeight = FontWeight.SemiBold,
-					fontSize = 18.sp,
-					maxLines = 2,
-					overflow = TextOverflow.Ellipsis,
-				)
-				Text(
-					text = item.description, fontSize = 16.sp,
-					maxLines = 1,
-					overflow = TextOverflow.Ellipsis,
-				)
-			}
-			Row(
-				modifier = modifier
-					.fillMaxWidth(),
-				horizontalArrangement = Arrangement.SpaceBetween,
-				verticalAlignment = Alignment.CenterVertically
-			) {
-
-				Text(
-					text = "$${item.price}",
-					fontSize = 20.sp,
-					fontWeight = FontWeight.Bold
-				)
-				IconButton(
-					onClick = {
-						navController.navigate(Screen.Detail.go(item.id))
-
-					},
-					colors = IconButtonDefaults.iconButtonColors(
-						containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
+			Column(modifier.padding(horizontal = 5.dp)) {
+				Column() {
+					Text(
+						text = item.title,
+						fontWeight = FontWeight.SemiBold,
+						maxLines = 2,
+						overflow = TextOverflow.Ellipsis,
+						style = MaterialTheme.typography.titleSmall
 					)
+					Text(
+						text = item.description,
+						maxLines = 1,
+						overflow = TextOverflow.Ellipsis,
+						style = MaterialTheme.typography.bodySmall
+
+					)
+				}
+				Row(
+					modifier = modifier
+						.fillMaxWidth(),
+					horizontalArrangement = Arrangement.SpaceBetween,
+					verticalAlignment = Alignment.CenterVertically
 				) {
-					Icon(
-						imageVector = Icons.Default.AddShoppingCart, contentDescription = "image"
+
+					Text(
+						text = "$${item.price}",
+						style = MaterialTheme.typography.titleMedium,
+						fontWeight = FontWeight.Bold
 					)
+					IconButton(
+						onClick = {
+							navController.navigate(Screen.Detail.go(item.id))
+
+						},
+						colors = IconButtonDefaults.iconButtonColors(
+							containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
+						)
+					) {
+						Icon(
+							imageVector = Icons.Default.AddShoppingCart,
+							contentDescription = "image"
+						)
+					}
 				}
 			}
 		}
@@ -127,7 +129,9 @@ fun MyLazyVerticalGrid(
 ) {
 	LazyVerticalGrid(
 		columns = GridCells.Fixed(2),
-		contentPadding = PaddingValues(10.dp),
+		contentPadding = PaddingValues(horizontal = 5.dp),
+		verticalArrangement = Arrangement.spacedBy(10.dp)
+
 	) {
 		items(products.orEmpty()) { product ->
 			MyVerticalGridItem(
