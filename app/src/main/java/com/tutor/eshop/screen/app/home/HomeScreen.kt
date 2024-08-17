@@ -78,8 +78,15 @@ fun HomeScreen(
 
 			LazyColumn(modifier.fillMaxSize()) {
 				item {
-					CategorySelect()
 					CarouselPromo()
+					CategorySelect()
+
+					GridCategory(
+						title = "Categories",
+						textButton = "See All",
+						buttonAction = { /*TODO*/ },
+					)
+
 					ListRowProductScreen(
 						title = "Promotion",
 						textButton = "See All",

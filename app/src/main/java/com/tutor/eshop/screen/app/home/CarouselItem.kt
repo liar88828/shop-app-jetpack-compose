@@ -51,7 +51,7 @@ fun CarouselPromo() {
 	}
 
 	Column(
-		modifier = Modifier.padding(horizontal = 10.dp),
+		modifier = Modifier.padding(10.dp),
 		horizontalAlignment = Alignment.CenterHorizontally,
 		verticalArrangement = Arrangement.SpaceBetween
 	) {
@@ -67,11 +67,15 @@ fun CarouselPromo() {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun DotBanner(pagerState: PagerState) {
-	LazyRow() {
+	LazyRow(
+	) {
 		items(pagerState.pageCount) {
 			Box(
 				modifier = Modifier
-					.padding(4.dp)
+					.padding(
+						horizontal = 5.dp,
+					)
+					.padding(top = 10.dp)
 					.size(
 						width = if (pagerState.currentPage == it) 40.dp else 10.dp,
 						height = 10.dp

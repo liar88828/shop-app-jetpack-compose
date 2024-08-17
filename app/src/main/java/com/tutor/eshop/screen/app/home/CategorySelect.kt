@@ -1,6 +1,7 @@
 package com.tutor.eshop.screen.app.home
 
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
@@ -33,16 +34,20 @@ fun CategorySelect(
 	val select = remember {
 		mutableStateOf("")
 	}
-	LazyRow(
-		modifier = modifier.fillMaxWidth(),
-		contentPadding = PaddingValues(10.dp)
+	Column(
+		modifier = modifier.padding(horizontal = 10.dp),
 	) {
-		items(listCategory) {
-			ChipItem(
-				title = it,
-				onClick = { select.value = it },
-				select = select.value == it
-			)
+		LazyRow(
+			modifier = modifier.fillMaxWidth(),
+			horizontalArrangement = Arrangement.spacedBy(10.dp)
+		) {
+			items(listCategory) {
+				ChipItem(
+					title = it,
+					onClick = { select.value = it },
+					select = select.value == it
+				)
+			}
 		}
 	}
 }
@@ -55,7 +60,6 @@ private fun ChipItem(
 	modifier: Modifier = Modifier
 ) {
 	FilterChip(
-		modifier = modifier.padding(horizontal = 4.dp),
 		shape = MaterialTheme.shapes.medium,
 		onClick = onClick,
 		label = { Text(title) },
@@ -63,7 +67,7 @@ private fun ChipItem(
 	)
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun CategorySelectPrev() {
 	CategorySelect()
